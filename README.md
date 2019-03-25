@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/GSA/datagov-deploy-common.svg?style=svg)](https://circleci.com/gh/GSA/datagov-deploy-common)
+
 # datagov-deploy-common
 
 Common configuration and baseline for all Data.gov platform nodes.

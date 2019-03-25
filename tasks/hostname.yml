@@ -4,6 +4,10 @@
     line: "127.0.0.1   localhost {{ inventory_hostname }}"
     regexp: "^127.0.0.1"
     dest: /etc/hosts
+    state: present
+  tags:
+    # https://github.com/moby/moby/issues/22281
+    - notest
 
 - name: Configure /etc/hostname
   copy:

@@ -32,6 +32,25 @@ An example playbook.
 
 ### Variables
 
+**`common_python_version_number`** string (default: 2.7.10)
+
+Custom version of python to install.
+
+
+**`common_python_version_directory`** string (default: `/usr/local/lib/python{{ common_python_version_number }}`)
+
+Directory to install custom python to.
+
+
+**`common_python_version_url`** string (default: `https://www.python.org/ftp/python/{{ common_python_version_number}}/{{ common_python_version_name }}.tgz`)
+
+URL to download python from.
+
+
+**`common_python_version_name`** string (default: `Python-{{ common_python_version_number }}`)
+
+Python filename.
+
 
 ## Contributing
 

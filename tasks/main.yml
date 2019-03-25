@@ -1,4 +1,7 @@
 ---
+- include_tasks: hostname.yml
+  tags: hostname
+
 - name: include vars for distribution
   include_vars: "{{ ansible_distribution_release }}.yml"
 

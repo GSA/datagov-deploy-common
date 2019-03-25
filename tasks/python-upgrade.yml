@@ -1,3 +1,5 @@
+# TODO this is only needed for ckan and python apps. Remove this and use
+# gsa.datagov-deploy-python-app in playbooks that need a custom python.
 ---
 - name: Check if python dir exists
   stat: path=/{{ common_python_version_directory }}/bin/python

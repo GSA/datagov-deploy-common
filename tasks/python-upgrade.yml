@@ -22,19 +22,19 @@
     src: "{{ common_python_version_url }}"
     dest: /var/tmp/
     remote_src: yes
-  when: python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
 
 - name: config new python
   command: ./configure --prefix {{ common_python_version_directory }} --enable-ipv6 --enable-unicode=ucs4 --enable-shared
   args:
     chdir: /var/tmp/{{ common_python_version_name }}
-  when: python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
 
 - name: install new python
   shell: "umask 022; make && make install"
   args:
     chdir: /var/tmp/{{ common_python_version_name }}
-  when: python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
 
 # TODO install python to a known prefix like /usr/local to avoid this
 - name: add python lib to ld.so.conf

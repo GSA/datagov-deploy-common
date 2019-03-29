@@ -1,6 +1,19 @@
 # TODO this is only needed for ckan and python apps. Remove this and use
 # gsa.datagov-deploy-python-app in playbooks that need a custom python.
 ---
+- name: include vars for distribution
+  include_vars: "{{ ansible_distribution_release }}.yml"
+
+- name: get information on newest versions of packages and their dependencies
+  apt: update_cache=yes cache_valid_time={{ 5 * 24 * 60 * 60 }}  # 5 days
+
+- name: make sure packages are installed
+  action: apt pkg={{ common_os_packages }} state=present
+
+# Upgrade python to 2.7.10
+# TODO This should be removed, use something like pyenv to manage python
+# installs and included in a python role
+
 - name: Check if python dir exists
   stat: path=/{{ common_python_version_directory }}/bin/python
   register: python_dir

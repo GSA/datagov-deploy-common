@@ -1,2 +1,8 @@
 ---
 # handlers file for datagov-deploy-common
+
+# nessus
+- name: restart nessus
+  service: 
+    name: nessusagent
+    state: restarted

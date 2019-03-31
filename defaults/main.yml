@@ -1,9 +1,12 @@
 ---
-
+# ca-certificates
+# grub
+# hostname
 # nessus
 nessus_agent_key: ''
 nessus_agent_group: ''
-nessus_agent_package: NessusAgent-6.10.8-ubuntu1110_amd64.deb
+nessus_agent_url:
+nessus_agent_package: NessusAgent-dummy.deb
 nessus_agent_host: cloud.tenable.com
 nessus_agent_port: 443
 
@@ -19,3 +22,36 @@ postfix_debconf_selections:
    question: postfix/main_mailer_type
    value: No configuration
    vtype: select
+
+# TLS
+common_tls_host_certificate: "test certificate"
+common_tls_host_key: "test key"
+
+# trendmicro
+# newrelic-infra
+# filebeat
+
+# unattended-upgrades
+unattended_origins_patterns:
+ - 'origin=Ubuntu,archive=${distro_codename}-security'
+ - 'o=Ubuntu,a=${distro_codename}'
+ - 'o=Ubuntu,a=${distro_codename}-updates'
+unattended_package_blacklist: []
+unattended_mail: "{{ datagov_team_email }}"
+unattended_mail_only_on_error: true
+
+# ntp - to add - aws nist
+ntp_server: gsa
+
+# logrotate
+logrotate_scripts:
+ - name: audit-log
+   path: "/var/log/audit/audit.log"
+   options:
+    - daily
+    - missingok
+    - compress
+    - delaycompress
+    - copytruncate
+    - size 250M
+    - rotate 5

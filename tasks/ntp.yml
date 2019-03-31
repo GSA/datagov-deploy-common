@@ -1,15 +1,15 @@
 ---
 - name: be sure ntp is installed
-  apt: 
-    name: ntp 
+  apt:
+    name: ntp
     state: present
   tags:
     - ntp
 
 - name: be sure ntpd is running and enabled
-  service: 
-    name: ntp 
-    state: started 
+  service:
+    name: ntp
+    state: started
     enabled: true
   tags:
     - ntp

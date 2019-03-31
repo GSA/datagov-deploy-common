@@ -3,27 +3,58 @@
   include_role:
     name: gsa.ansible-os-ubuntu-14
   when: ansible_distribution_release == "trusty"
+  tags:
+    - molecule-notest
 
-- name: Hardening for Ubuntu Bionic 
+- name: Hardening for Ubuntu Xenial or Bionic
   include_role:
-    name: gsa.ansible-os-ubuntu-16  
-  when: ansible_distribution_release == "bionic"
+    name: gsa.ansible-os-ubuntu-16
+  when: ansible_distribution_release == "bionic" or ansible_distribution_release == "xenial"
+  tags:
+    - molecule-notest
+
+- name: Install upstart for Ubuntu Trusty
+  include_role:
+    name: dwcramer.upstart
+  when: ansible_distribution_release == "trusty"
+
+- name: Install build-essential
+  include_role:
+    name: ANXS.build-essential
+
+- name: Install apt-utils
+  include_role:
+    name: ANXS.apt
+
+- include_tasks: system-packages.yml
 
 - name: Install unattended-upgrades
   include_role:
-    name: unattended-upgrades
+    name: jnv.unattended-upgrades
 
-- name: Install postfix 
+- name: Install postfix mail server
   include_role:
-    name: postfix  
+    name: oefenweb.postfix
 
-- import_playbook: ntp.yml
-- import_playbook: hostname.yml
-- import_playbook: ca-certificates.yml
-- import_playbook: grub.yml
-- import_playbook: hardening.yml
-- import_playbook: trendmicro.yml
-- import_playbook: filebeats.yml
-- import_playbook: misc.yml
-- import_playbook: python-upgrade.yml
+- name: Install newrelic infrastructure agent
+  include_role:
+    name: newrelic.newrelic-infra
+#  when: not ansible_distribution_release == "bionic"
 
+- name: Install secops filebeat agent
+  include_role:
+    name: gsa.ansible-role-beats
+
+- name: Install logrotate
+  include_role:
+    name: nickhammond.logrotate
+
+- include_tasks: ca-certficates.yml
+- include_tasks: grub.yml
+- include_tasks: hostname.yml
+- include_tasks: nessus.yml
+- include_tasks: ntp.yml
+- include_tasks: python-upgrade.yml
+- include_tasks: tls.yml
+# - include_tasks: trendmicro.yml
+- include_tasks: unattended-upgrades-reboot-emails.yml

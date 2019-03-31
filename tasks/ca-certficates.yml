@@ -1,6 +1,11 @@
 ---
 - name: install GSA CA certificates
-  copy: src=gsa.crt dest=/usr/local/share/ca-certificates/gsa.crt mode=0644 owner=root group=root
+  copy:
+    src: gsa.crt
+    dest: /usr/local/share/ca-certificates/gsa.crt
+    mode: 0644
+    owner: root
+    group: root
   register: gsa_ca_certificate
 
 - name: update system certificates

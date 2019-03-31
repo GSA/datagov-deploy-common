@@ -1,0 +1,13 @@
+---
+- name: include vars for distribution
+  include_vars: "{{ ansible_distribution_release }}.yml"
+
+- name: get information on newest versions of packages and their dependencies
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ 5 * 24 * 60 * 60 }}"
+
+- name: make sure packages are installed
+  apt:
+    name: "{{ common_os_packages }}"
+    state: present

@@ -6,30 +6,34 @@
     dest: "/tmp/{{ nessus_agent_package }}"
 
 - name: Install Nessus Agent from .deb package
-  apt: 
+  apt:
     deb: "/tmp/{{ nessus_agent_package }}"
 
 - name: Check agent link status
   command: /opt/nessus_agent/sbin/nessuscli agent status
   become: yes
   register: nessus-register
-  tags: 
-    - molecule_notest
+  tags:
+    - molecule-notest
     - nessus-register
+    - skip_ansible_lint
 
 - name: Configure Nessus Agent
   command: >
       /opt/nessus_agent/sbin/nessuscli agent link
-      --key="{{nessus_agent_key}}"
-      --host="{{nessus_agent_host}}"
-      --port="{{nessus_agent_port}}"
-      --groups="{{nessus_agent_group}}"
+      --key="{{ nessus_agent_key }}"
+      --host="{{ nessus_agent_host }}"
+      --port="{{ nessus_agent_port }}"
+      --groups="{{ nessus_agent_group }}"
   become: true
   failed_when: nessus-register | failed
   notify: restart nessus
+  tags:
+    - molecule-notest
+    - skip_ansible_lint
 
 - name: Ensure nessusagent is started
-  service: 
+  service:
     name: nessusagent
     state: started
     enabled: yes

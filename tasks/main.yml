@@ -13,20 +13,28 @@
 # installs and included in a python role
 - include: python-upgrade.yml
 
-- name: install reboot-notify script
-  copy: src=reboot-notify.sh dest=/usr/local/reboot-notify.sh mode=0755 owner=root group=root
-  when: ansible_distribution_release == "trusty"
+- name: remove incorrectly installed reboot-notify script
+  file: dest=/usr/local/reboot-notify.sh state=absent
 
-  # In xenial+ a new package reboot-notifier does this
+- name: install reboot-notify script
+  template: src=reboot-notify.sh.j2 dest=/usr/local/bin/reboot-notify.sh mode=0755 owner=root group=root
+  when:
+    - ansible_distribution_release == "trusty"
+    - common_reboot_notify_email is defined
+
+
+# In xenial+ a new package reboot-notifier does this
 - name: notify when reboot is required
   cron: >-
     name="notifies when a reboot is required"
     cron_file=reboot-notify
     special_time=daily
     state=present
-    job=/usr/local/reboot-notify.sh
+    job=/usr/local/bin/reboot-notify.sh
     user=root
-  when: ansible_distribution_release == "trusty"
+  when:
+    - ansible_distribution_release == "trusty"
+    - common_reboot_notify_email is defined
 
 - name: be sure ntpd is running and enabled
   service: name=ntp state=started enabled=yes

@@ -54,6 +54,16 @@ URL to download python from.
 Python filename.
 
 
+**`common_reboot_notify_email`** string
+
+Email address to send reboot-notify emails.
+
+
+**`common_reboot_notify_from_email`** string
+
+Email address that reboot-notify emails will be addressed From.
+
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md) for additional information.

@@ -1,0 +1,10 @@
+---
+# Prevent a bug in grub where update-grub hangs probing devices
+
+- name: ensure grub os prober is disabled
+  lineinfile:
+    path: /etc/default/grub
+    line: 'GRUB_DISABLE_OS_PROBER=true'
+    state: present
+  tags:
+    - molecule-notest

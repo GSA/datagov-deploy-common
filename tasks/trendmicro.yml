@@ -8,7 +8,7 @@
 
 - name: Fallback to get .deb package from /files
   copy:
-    src: "{{ trendmicro_agent_local }}"
+    src: "trendmicro-dummy.deb"
     dest: "/tmp/trendmicro.deb"
   when: trendmicro_package_url is undefined
 

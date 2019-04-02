@@ -16,3 +16,4 @@ python_version = "3.6"
 [scripts]
 test ="molecule test"
 debug ="molecule --debug test"
+converge="molecule converge"

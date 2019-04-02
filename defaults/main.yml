@@ -29,6 +29,8 @@ common_tls_host_key: "test key"
 
 # trendmicro
 # newrelic-infra
+common_newrelic_enabled: false
+
 # filebeat
 
 # unattended-upgrades

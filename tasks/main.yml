@@ -42,6 +42,7 @@
 - name: Install newrelic infrastructure agent
   include_role:
     name: newrelic.newrelic-infra
+  when: common_newrelic_enabled is true
   tags:
     - molecule-notest      # to fix
 

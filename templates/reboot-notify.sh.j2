@@ -5,10 +5,10 @@ set -o pipefail
 set -o nounset
 
 # If reboot-required does not exist, we're done
-[[ ! -x /var/run/reboot-required ]] && exit 0
+[[ ! -e /var/run/reboot-required ]] && exit 0
 
 sendmail {{ common_reboot_notify_email }} <<EOF
-From: reboot-notify <{{ common_reboot_notify_from_email }}>
+From: reboot-notify <root@localhost>
 Subject: [reboot-notify] A reboot is required on $(hostname --fqdn)
 
 Hello Data.gov,

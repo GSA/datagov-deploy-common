@@ -4,15 +4,17 @@ common_os_packages:
   - atool
   - cron
   - git
-  - nano
   - htop
+  - libbz2-dev
+  - libssl-dev
+  - nano
   - ntp
-  - reboot-notifier
-  - ruby
-  - systemd
-  - software-properties-common
   - python-dev
   - python-pip
   - python-setuptools
   - python-virtualenv
+  - reboot-notifier
+  - ruby
   - ruby-dev
+  - software-properties-common
+  - systemd

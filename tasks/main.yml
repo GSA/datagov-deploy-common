@@ -71,6 +71,7 @@
 - name: Install secops filebeat agent
   include_role:
     name: gsa.ansible-role-beats
+  when: filebeat_enabled
 
 - name: Install logrotate
   include_role:
@@ -79,9 +80,11 @@
 - include_tasks: ca-certficates.yml
 - include_tasks: grub.yml
 - include_tasks: nessus.yml
+  when: nessus_agent_enabled
 - include_tasks: ntp.yml
 - include_tasks: python-upgrade.yml
 - include_tasks: unattended-upgrades-reboot-emails.yml
 - include_tasks: trendmicro.yml
+  when: trendmicro_enabled
   tags:
     - molecule-notest      # to fix

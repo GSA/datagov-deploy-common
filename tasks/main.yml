@@ -74,14 +74,6 @@
   tags:
     - postfix
 
-- name: Install newrelic infrastructure agent
-  include_role:
-    name: newrelic.newrelic-infra
-  when: common_newrelic_enabled
-  tags:
-    - newrelic
-    - molecule-notest      # to fix
-
 - name: Install secops filebeat agent
   include_role:
     name: gsa.ansible-role-beats
@@ -124,4 +116,16 @@
   when: trendmicro_enabled
   tags:
     - trendmicro
+    - molecule-notest      # to fix
+
+# Any service monitored by New Relic should've been started by now. We put this
+# at the end to avoid getting alerts when first provisioning a machine.
+# Otherwise, we'll start monitoring and alerting on things that might not have
+# been provisioned yet.
+- name: Install newrelic infrastructure agent
+  include_role:
+    name: newrelic.newrelic-infra
+  when: common_newrelic_enabled
+  tags:
+    - newrelic
     - molecule-notest      # to fix

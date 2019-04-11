@@ -34,7 +34,7 @@ An example playbook.
 
 ### Variables
 
-## nessus
+#### nessus
 - `nessus_agent_key`: key used for linking with nessus host (this is a required variable)
 
 - `nessus_agent_group`: host group this agent should be added to when linking with nessus host (this is a required variable)
@@ -48,7 +48,8 @@ An example playbook.
         nessus_agent_package: nessus-agent 
         nessus_agent_package: /tmp/nessus-agent_6.8.1_amd64.deb
 
-## python-upgrade
+
+#### python-upgrade
 **`common_python_version_number`** string (default: 2.7.10)
 
 Custom version of python to install.
@@ -72,6 +73,91 @@ Python filename.
 **`common_reboot_notify_email`** string
 
 Email address to send reboot-notify emails.
+
+
+### Tags
+
+You can run the playbook with these tags for quicker or targeted plays.
+
+
+#### ca-certificates
+
+Install GSA internal CA certificates.
+
+
+#### filebeat
+
+Filebeat log streaming agent.
+
+
+#### grub
+
+Grub fixes.
+
+
+#### hardening
+
+Tasks for OS hardening.
+
+
+#### hostname
+
+Includes the hostname tasks to update /etc/hosts and hostname.
+
+
+#### logrotate
+
+Schedule log rotation.
+
+
+#### nessus
+
+Security compliance scanning agent.
+
+
+#### newrelic
+
+New Relic host monitoring.
+
+
+#### ntp
+
+Network Time Protocol agent.
+
+
+#### postfix
+
+Install and configure postfix mail server for mail relay.
+
+
+#### python-upgrade
+
+Install a custom version of python.
+
+
+#### reboot-notify
+
+Send an email to administrators when a reboot is required.
+
+
+#### system-packages
+
+Install common OS packages.
+
+
+#### tls
+
+Install the host certificate and key.
+
+
+#### trendmicro
+
+On-host SecOps managed firewall.
+
+
+#### unattended-upgrades
+
+Configure unattended-upgrades for automatic apt-get updates/upgrades.
 
 
 ## Contributing

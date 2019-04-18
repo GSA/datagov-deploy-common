@@ -1,11 +1,14 @@
 ---
 - include_tasks: hostname.yml
+  tags:
+    - hostname
 
 - name: Hardening for Ubuntu Trusty
   include_role:
     name: gsa.ansible-os-ubuntu-14
   when: ansible_distribution_release == "trusty"
   tags:
+    - hardening
     - molecule-notest
 
 - name: Hardening for Ubuntu Xenial or Bionic
@@ -13,6 +16,7 @@
     name: gsa.ansible-os-ubuntu-16
   when: ansible_distribution_release == "bionic" or ansible_distribution_release == "xenial"
   tags:
+    - hardening
     - molecule-notest
 
 - name: remove incorrectly installed reboot-notify script
@@ -51,40 +55,73 @@
     name: ANXS.apt
 
 - include_tasks: system-packages.yml
+  tags:
+    - system-packages
+
 - include_tasks: tls.yml
+  tags:
+    - tls
 
 - name: Install unattended-upgrades
   include_role:
     name: jnv.unattended-upgrades
+  tags:
+    - unattended-upgrades
 
 - name: Install postfix mail server
   include_role:
     name: oefenweb.postfix
+  tags:
+    - postfix
 
 - name: Install newrelic infrastructure agent
   include_role:
     name: newrelic.newrelic-infra
   when: common_newrelic_enabled
   tags:
+    - newrelic
     - molecule-notest      # to fix
 
 - name: Install secops filebeat agent
   include_role:
     name: gsa.ansible-role-beats
   when: filebeat_enabled
+  tags:
+    - filebeat
 
 - name: Install logrotate
   include_role:
     name: nickhammond.logrotate
+  tags:
+    - logrotate
 
 - include_tasks: ca-certficates.yml
+  tags:
+    - ca-certificates
+
 - include_tasks: grub.yml
+  tags:
+    - grub
+
 - include_tasks: nessus.yml
   when: nessus_agent_enabled
+  tags:
+    - nessus
+
 - include_tasks: ntp.yml
+  tags:
+    - ntp
+
 - include_tasks: python-upgrade.yml
+  tags:
+    - python-upgrade
+
 - include_tasks: unattended-upgrades-reboot-emails.yml
+  tags:
+    - reboot-notify
+
 - include_tasks: trendmicro.yml
   when: trendmicro_enabled
   tags:
+    - trendmicro
     - molecule-notest      # to fix

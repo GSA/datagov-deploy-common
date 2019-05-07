@@ -5,12 +5,6 @@
     dest: /tmp/trendmicro.deb
     validate_certs: no
 
-- name: Fallback to get .deb package from /files
-  copy:
-    src: "trendmicro-dummy.deb"
-    dest: "/tmp/trendmicro.deb"
-  when: trendmicro_package_url is undefined
-
 - name: Install trendmicro
   apt:
     deb: "/tmp/trendmicro.deb"

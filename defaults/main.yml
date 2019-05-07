@@ -41,6 +41,7 @@ nessus_agent_enabled: false
 
 # trendmicro
 trendmicro_enabled: false
+trendmicro_deb_url: https://dsm.sec.helix.gsa.gov/software/agent/Ubuntu_18.04/x86_64/
 
 
 # unattended-upgrades

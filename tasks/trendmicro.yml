@@ -1,16 +1,9 @@
 ---
 - name: Get trendmicro latest .deb package from internal network
   get_url:
-    url: "{{ trendmicro_agent_url }}"
+    url: "{{ trendmicro_deb_url }}"
     dest: /tmp/trendmicro.deb
     validate_certs: no
-  when: trendmicro_deb_url is defined
-
-- name: Fallback to get .deb package from /files
-  copy:
-    src: "trendmicro-dummy.deb"
-    dest: "/tmp/trendmicro.deb"
-  when: trendmicro_package_url is undefined
 
 - name: Install trendmicro
   apt:

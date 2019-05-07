@@ -12,7 +12,8 @@
 - name: Check agent link status
   command: /opt/nessus_agent/sbin/nessuscli agent status
   become: yes
-  register: nessus-register
+  ignore_errors: yes
+  register: nessus_register
   tags:
     - molecule-notest
     - nessus-register
@@ -26,7 +27,7 @@
       --port="{{ nessus_agent_port }}"
       --groups="{{ nessus_agent_group }}"
   become: true
-  failed_when: nessus-register | failed
+  when: nessus_register is failed
   notify: restart nessus
   tags:
     - molecule-notest

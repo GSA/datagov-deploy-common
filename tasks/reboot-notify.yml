@@ -27,3 +27,12 @@
   when:
     - ansible_distribution_release == "trusty"
     - common_reboot_notify_email is defined
+
+- name: configure reboot-notifier
+  lineinfile:
+    regexp: NOTIFICATION_EMAIL=
+    line: "NOTIFICATION_EMAIL=\"{{ common_reboot_notify_email }}\""
+    path: /etc/default/reboot-notifier
+  when:
+    - ansible_distribution_release != "trusty"
+    - common_reboot_notify_email is defined

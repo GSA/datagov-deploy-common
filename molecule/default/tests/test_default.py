@@ -5,6 +5,8 @@ import testinfra.utils.ansible_runner
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
+reboot_notifier_email = 'email@example.com'
+
 
 def test_hosts_file(host):
     f = host.file('/etc/hosts')
@@ -44,3 +46,14 @@ def test_key(host):
     assert f.mode == 0o640
     assert f.user == 'root'
     assert f.group == 'ssl-cert'
+
+
+def test_reboot_notifier(host):
+    # We only install reboot-notifier on 16.04+
+    if host.system_info.codename == 'trusty':
+        return
+
+    f = host.file('/etc/default/reboot-notifier')
+
+    assert f.exists
+    assert f.contains('NOTIFICATION_EMAIL="%s"' % reboot_notifier_email)

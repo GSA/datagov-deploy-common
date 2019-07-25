@@ -18,7 +18,7 @@ jobs:
           name: install python dependencies
           command: |
             pip install --user --upgrade pipenv
-            pipenv install --dev
+            pipenv sync --dev
       - save_cache:
           key: v1-pip-{{ checksum "Pipfile.lock" }}
           paths:

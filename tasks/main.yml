@@ -24,6 +24,10 @@
     name: dwcramer.upstart
   when: ansible_distribution_release == "trusty"
 
+- name: Install operator SSH keys
+  lineinfile: path=/home/ubuntu/.ssh/authorized_keys line={{ item.public_key }} state={{ item.removed | default(false) | ternary('absent', 'present') }}
+  loop: "{{ common_operators }}"
+
 - name: Install build-essential
   import_role:
     name: ANXS.build-essential

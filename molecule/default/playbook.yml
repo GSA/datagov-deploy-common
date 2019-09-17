@@ -5,3 +5,11 @@
     - role: datagov-deploy-common
       vars:
         common_reboot_notify_email: email@example.com
+        common_operators:
+          - username: operator1
+            email: operator1@example.com
+            public_key: ssh-rsa key operator1@example.com
+          - username: operator_removed
+            email: operator_removed@example.com
+            public_key: ssh-rsa key operator_removed@example.com
+            removed: true

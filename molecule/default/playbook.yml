@@ -9,7 +9,7 @@
           - username: operator1
             email: operator1@example.com
             public_key: ssh-rsa key operator1@example.com
+            active: true
           - username: operator_removed
             email: operator_removed@example.com
             public_key: ssh-rsa key operator_removed@example.com
-            removed: true

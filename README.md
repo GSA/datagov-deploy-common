@@ -34,6 +34,24 @@ An example playbook.
 
 ### Variables
 
+**`common_reboot_notify_email`** string
+
+Email address to send reboot-notify emails.
+
+**`common_operators`** array<object> (default: []
+
+The list of operators and their public SSH keys to install on the machine for
+access.
+
+```
+common_operators:
+  - username: userone
+    email: userone@example.com
+    public_key: ssh-rsa aabbccddeeff1234567890 comment
+    active: true
+```
+
+
 #### nessus
 - `nessus_agent_key`: key used for linking with nessus host (this is a required variable)
 
@@ -68,11 +86,6 @@ URL to download python from.
 **`common_python_version_name`** string (default: `Python-{{ common_python_version_number }}`)
 
 Python filename.
-
-
-**`common_reboot_notify_email`** string
-
-Email address to send reboot-notify emails.
 
 
 ### Tags

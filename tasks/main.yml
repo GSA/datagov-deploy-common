@@ -23,6 +23,14 @@
   import_role:
     name: dwcramer.upstart
   when: ansible_distribution_release == "trusty"
+  tags:
+    - upstart
+
+- name: Remove broken upstart log rotation
+  file: path=/etc/logrotate.d/upstart state=absent
+  when: ansible_distribution_release == "trusty"
+  tags:
+    - upstart
 
 - name: Install build-essential
   import_role:

@@ -28,6 +28,10 @@ provisioner:
   lint:
     name: ansible-lint
     enabled: true
+  inventory:
+    group_vars:
+      all:
+        inactive_operator_key: ssh-rsa key operator_inactive@example.com
 scenario:
   name: default
   test_sequence:

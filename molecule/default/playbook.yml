@@ -10,6 +10,6 @@
             email: operator1@example.com
             public_key: ssh-rsa key operator1@example.com
             active: true
-          - username: operator_removed
-            email: operator_removed@example.com
-            public_key: ssh-rsa key operator_removed@example.com
+          - username: operator_inactive
+            email: operator_inactive@example.com
+            public_key: "{{ inactive_operator_key }}"

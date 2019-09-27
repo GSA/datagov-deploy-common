@@ -32,6 +32,10 @@
   tags:
     - upstart
 
+- name: Install operator SSH keys
+  lineinfile: path=/home/ubuntu/.ssh/authorized_keys line={{ item.public_key }} state={{ item.active | default(false) | ternary('present', 'absent') }}
+  loop: "{{ common_operators }}"
+
 - name: Install build-essential
   import_role:
     name: ANXS.build-essential

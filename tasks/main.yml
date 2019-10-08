@@ -66,7 +66,11 @@
 
 - name: Install secops filebeat agent
   import_role:
-    name: gsa.ansible-role-beats
+    name: jobscore.beats
+  vars:
+    # Don't pin the version, allow filebeat to be updated
+    # from apt
+    beats_hold_products: false
   when: filebeat_enabled
   tags:
     - filebeat

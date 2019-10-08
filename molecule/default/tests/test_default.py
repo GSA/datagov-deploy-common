@@ -54,6 +54,31 @@ def test_audit_report_run(host):
     assert report.stderr == ''
 
 
+def test_filebeat_package(host):
+    package = host.package("filebeat")
+
+    assert package.is_installed
+
+    major_version = package.version.split('.')[0]
+    assert major_version == '6'
+
+
+def test_filebeat_service(host):
+    service = host.service('filebeat')
+    assert service.is_running
+    assert service.is_enabled
+
+
+def test_filebeat_config(host):
+    config = host.file('/etc/filebeat/filebeat.yml')
+
+    assert config.is_file
+    assert config.exists
+    assert config.user == 'root'
+    assert config.group == 'root'
+    assert config.mode == 0o644
+
+
 def test_ntp_installed(host):
     ntp = host.package('ntp')
     assert ntp.is_installed

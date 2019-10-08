@@ -6,9 +6,7 @@
 - src: nickhammond.logrotate
 - src: oefenweb.postfix
 - src: newrelic.newrelic-infra
-  version: 0.6.1
 - src: jnv.unattended-upgrades
-  version: master
 - src: jobscore.beats
 - src: https://github.com/GSA/ansible-os-ubuntu-14
   name: gsa.ansible-os-ubuntu-14

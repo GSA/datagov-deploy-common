@@ -71,6 +71,8 @@
     # Don't pin the version, allow filebeat to be updated
     # from apt
     beats_hold_products: false
+    beats_products:
+      - filebeat
   when: filebeat_enabled
   tags:
     - filebeat

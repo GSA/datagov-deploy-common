@@ -1,4 +1,6 @@
 ---
+common_audit_report_enabled: false
+
 # ca-certificates
 # grub
 # hostname

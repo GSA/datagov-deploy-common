@@ -34,11 +34,16 @@ An example playbook.
 
 ### Variables
 
+**`common_audit_report_enabled`** boolean (default: false)
+
+Enable or disable the host audit report.
+
+
 **`common_reboot_notify_email`** string
 
 Email address to send reboot-notify emails.
 
-**`common_operators`** array<object> (default: []
+**`common_operators`** array<object> (default: [])
 
 The list of operators and their public SSH keys to install on the machine for
 access.
@@ -91,6 +96,11 @@ Python filename.
 ### Tags
 
 You can run the playbook with these tags for quicker or targeted plays.
+
+
+#### audit-report
+
+Configure the audit report.
 
 
 #### ca-certificates

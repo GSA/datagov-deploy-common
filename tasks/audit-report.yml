@@ -1,0 +1,29 @@
+---
+- name: install OS dependencies for audit-report
+  apt: name={{ packages }} state=present
+  vars:
+    packages:
+      - auditd
+      - libdate-manip-perl
+      - logwatch
+
+- name: remove default logwatch cron job
+  file: path=/etc/cron.daily/00logwatch state=absent
+
+- name: install Logwatch ignore file
+  copy: src=etc_logwatch_conf_ignore.conf dest=/etc/logwatch/conf/ignore.conf owner=root group=root mode=0644
+
+- name: install audit-report.sh
+  copy: src=audit-report.sh dest=/usr/local/bin/audit-report.sh mode=0755 owner=root group=root
+
+- name: configure cron job for audit-report
+  cron:
+    name: audit-report
+    cron_file: audit-report
+    job: /usr/local/bin/audit-report.sh
+    user: root
+    hour: 0
+    minute: 10
+    weekday: 5  # Friday
+    disabled: "{{ not common_audit_report_enabled }}"
+    state: present

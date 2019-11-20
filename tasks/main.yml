@@ -77,6 +77,10 @@
   tags:
     - logrotate
 
+- import_tasks: audit-report.yml
+  tags:
+    - audit-report
+
 - import_tasks: ca-certficates.yml
   tags:
     - ca-certificates

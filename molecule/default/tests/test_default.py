@@ -17,6 +17,36 @@ def test_hosts_file(host):
     assert f.group == 'root'
 
 
+def test_audit_report_script(host):
+    script = host.file('/usr/local/bin/audit-report.sh')
+
+    assert script.exists
+    assert script.user == 'root'
+    assert script.group == 'root'
+    assert script.mode == 0o755
+
+
+def test_audit_report_cron(host):
+    cron = host.file('/etc/cron.d/audit-report')
+
+    assert cron.exists
+    assert cron.user == 'root'
+    assert cron.group == 'root'
+    assert cron.mode == 0o644
+
+    # Job is disabled by default
+    assert cron.contains('^#.*/usr/local/bin/audit-report.sh')
+
+
+def test_audit_report_ignore(host):
+    ignore = host.file('/etc/logwatch/conf/ignore.conf')
+
+    assert ignore.exists
+    assert ignore.user == 'root'
+    assert ignore.group == 'root'
+    assert ignore.mode == 0o644
+
+
 def test_ntp_installed(host):
     ntp = host.package('ntp')
     assert ntp.is_installed

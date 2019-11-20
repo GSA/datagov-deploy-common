@@ -35,7 +35,16 @@ def test_audit_report_cron(host):
     assert cron.mode == 0o644
 
     # Job is disabled by default
-    assert cron.contains('^#/usr/local/bin/audit-report.sh')
+    assert cron.contains('^#.*/usr/local/bin/audit-report.sh')
+
+
+def test_audit_report_ignore(host):
+    ignore = host.file('/etc/logwatch/conf/ignore.conf')
+
+    assert ignore.exists
+    assert ignore.user == 'root'
+    assert ignore.group == 'root'
+    assert ignore.mode == 0o644
 
 
 def test_ntp_installed(host):

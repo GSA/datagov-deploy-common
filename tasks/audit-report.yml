@@ -10,6 +10,9 @@
 - name: remove default logwatch cron job
   file: path=/etc/cron.daily/00logwatch state=absent
 
+- name: install Logwatch ignore file
+  copy: src=etc_logwatch_conf_ignore.conf dest=/etc/logwatch/conf/ignore.conf owner=root group=root mode=0644
+
 - name: install audit-report.sh
   copy: src=audit-report.sh dest=/usr/local/bin/audit-report.sh mode=0755 owner=root group=root
 

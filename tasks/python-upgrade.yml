@@ -29,6 +29,10 @@
     dest: /var/tmp/
     remote_src: yes
   when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  register: result
+  until: not result.failed
+  retries: 3
+  delay: 15
 
 - name: config new python
   command: "./configure --prefix {{ common_python_version_directory }} --enable-ipv6 --enable-unicode=ucs4 --enable-shared"

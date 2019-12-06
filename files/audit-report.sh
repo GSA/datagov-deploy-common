@@ -12,7 +12,7 @@ logwatch_detail=9
 
 
 function run_aureport () {
-  aureport --start week-ago --interpret --summary "$@"
+  /sbin/aureport --start week-ago --interpret --summary "$@"
 }
 
 cat <<EOF
@@ -59,7 +59,7 @@ run_aureport --executable
 echo
 
 # Include the logwatch report
-logwatch --detail "$logwatch_detail" --range "between -7 days and -1 days" --output stdout \
+/usr/sbin/logwatch --detail "$logwatch_detail" --range "between -7 days and -1 days" --output stdout \
   --service All \
   --service -zz-network \
   --service -zz-sys

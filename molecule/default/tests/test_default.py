@@ -47,6 +47,13 @@ def test_audit_report_ignore(host):
     assert ignore.mode == 0o644
 
 
+def test_audit_report_run(host):
+    report = host.run('/usr/local/bin/audit-report.sh')
+
+    assert report.succeeded
+    assert report.stderr == ''
+
+
 def test_ntp_installed(host):
     ntp = host.package('ntp')
     assert ntp.is_installed

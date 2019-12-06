@@ -75,6 +75,6 @@ cat <<EOF
 
 
 --
-$(basename $0)
+$(basename $0) on $(hostname)
 https://github.com/GSA/datagov-deploy-common
 EOF

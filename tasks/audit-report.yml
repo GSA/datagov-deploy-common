@@ -22,7 +22,7 @@
     cron_file: audit-report
     job: /usr/local/bin/audit-report.sh
     user: root
-    hour: 0
+    hour: 13
     minute: 10
     weekday: 5  # Friday
     disabled: "{{ not common_audit_report_enabled }}"

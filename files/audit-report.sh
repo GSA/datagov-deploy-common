@@ -9,10 +9,14 @@ set -o pipefail
 set -o nounset
 
 logwatch_detail=9
+codename=$(lsb_release --codename --short)
 
+function is_trusty () {
+  [ "$codename" = "trusty" ]
+}
 
 function run_aureport () {
-  aureport --start week-ago --interpret --summary "$@"
+  /sbin/aureport --start week-ago --interpret --summary "$@"
 }
 
 cat <<EOF
@@ -36,7 +40,8 @@ EOF
 run_aureport
 
 # Command summary
-run_aureport --comm
+# Trusty does not support --comm
+is_trusty || run_aureport --comm
 
 # Events summary
 run_aureport --event
@@ -45,7 +50,8 @@ run_aureport --event
 run_aureport --login
 
 # Account modifications
-run_aureport --mods
+# Trusty has not implemented the mods summary
+is_trusty || run_aureport --mods
 
 # Mandatory Access Control summary
 run_aureport --mac
@@ -59,7 +65,7 @@ run_aureport --executable
 echo
 
 # Include the logwatch report
-logwatch --detail "$logwatch_detail" --range "between -7 days and -1 days" --output stdout \
+/usr/sbin/logwatch --detail "$logwatch_detail" --range "between -7 days and -1 days" --output stdout \
   --service All \
   --service -zz-network \
   --service -zz-sys
@@ -69,6 +75,6 @@ cat <<EOF
 
 
 --
-$(basename $0)
+$(basename $0) on $(hostname)
 https://github.com/GSA/datagov-deploy-common
 EOF

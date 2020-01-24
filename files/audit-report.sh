@@ -16,7 +16,7 @@ function is_trusty () {
 }
 
 function run_aureport () {
-  /sbin/aureport --start week-ago --interpret --summary "$@"
+  /sbin/aureport --input-logs --start week-ago --interpret --summary "$@"
 }
 
 cat <<EOF

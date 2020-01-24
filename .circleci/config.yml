@@ -26,7 +26,6 @@ jobs:
       - run:
           name: test
           command: pipenv run molecule test --all 2>&1 | tee /tmp/molecule.log
-          no_output_timeout: 20m
       - store_artifacts:
           path: /tmp/molecule.log
           destination: molecule.log

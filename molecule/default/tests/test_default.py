@@ -76,7 +76,7 @@ def test_filebeat_config(host):
     assert config.exists
     assert config.user == 'root'
     assert config.group == 'root'
-    assert config.mode == 0o644
+    assert config.mode == 0o600
 
 
 def test_ntp_installed(host):

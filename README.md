@@ -177,6 +177,16 @@ Install the host certificate and key.
 
 On-host SecOps managed firewall.
 
+**`trendmicro_enabled`** boolean (default: false)
+
+Enable or disable trendmicro install. Setting this to false does not remove
+trendmicro.
+
+**`trendmicro_policy_id`** boolean **required**
+
+This is required when trendmicro_enabled is set. This is the numeric policy id
+that should be applied to this host and is assigned by SecOps.
+
 
 #### unattended-upgrades
 

@@ -14,6 +14,7 @@ common_python_version_name: Python-{{ common_python_version_number }}
 
 # filebeat
 filebeat_enabled: false
+beats_hold_products: false  # Don't pin versions in apt.
 
 
 # postfix

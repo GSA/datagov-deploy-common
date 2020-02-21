@@ -1,4 +1,12 @@
 ---
+- name: assert trendmicro_policy_id is set
+  fail:
+    msg: |
+      trendmicro_enabled is true but trendmicro_policy_id is not set. All hosts
+      in a trendmicro environment should be properly configured with a policy
+      id.
+  when: trendmicro_policy_id is undefined
+
 - name: Get trendmicro latest .deb package from internal network
   get_url:
     url: "{{ trendmicro_deb_url }}"
@@ -22,9 +30,4 @@
 
 - name: register trendmicro agent
   command: /opt/ds_agent/dsa_control -a dsm://dsm.sec.helix.gsa.gov:4120/ "policyid:{{ trendmicro_policy_id }}"
-  # TODO clarify if jumpbox should have a policy id
-  # In general, when trendmicro_enabled is true, a policy id should be set for
-  # each host in the environment. Currently, jumpboxes do not have a
-  # trendmicro policy. If we find that jumpboxes _should_ have a policy id,
-  # then we should make an assertion.
   when: trendmicro_policy_id is defined

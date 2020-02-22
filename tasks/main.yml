@@ -71,6 +71,7 @@
     # Don't pin the version, allow filebeat to be updated
     # from apt
     beats_hold_products: false
+    beats_ver: "6.*"  # apt-get version specifier. We want the latest 6.x
     beats_products:
       - filebeat
   when: filebeat_enabled

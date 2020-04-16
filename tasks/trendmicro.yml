@@ -12,6 +12,7 @@
     url: "{{ trendmicro_deb_url }}"
     dest: /tmp/trendmicro.deb
     validate_certs: no
+    force: yes
   register: result
   retries: 3
   delay: 30

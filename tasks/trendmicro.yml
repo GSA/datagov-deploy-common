@@ -21,7 +21,6 @@
 - name: Install trendmicro
   apt:
     deb: "/tmp/trendmicro.deb"
-    force: yes
   register: trendmicro_installed
 
 - name: sleep 10 seconds

@@ -9,6 +9,7 @@ common_os_packages:
   - lib32z1-dev
   - libbz2-dev
   - libffi-dev
+  - libgdbm-dev
   - libgeos-c1
   - libpq-dev
   - libssl-dev

@@ -1,0 +1,18 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Create ubuntu user
+      user: name=ubuntu state=present
+
+    - name: Create ubuntu ssh directory
+      file: path=/home/ubuntu/.ssh state=directory owner=ubuntu group=ubuntu mode=0750
+
+    - name: Create ubuntu authorized_keys with inactive user
+      copy:
+        dest: /home/ubuntu/.ssh/authorized_keys
+        owner: ubuntu
+        group: ubuntu
+        mode: "0640"
+        content: |
+          {{ inactive_operator_key }}

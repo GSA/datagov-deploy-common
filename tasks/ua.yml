@@ -1,0 +1,8 @@
+- name: install ubuntu advantage client
+  apt:
+    name: ubuntu-advantage-tools
+    state: latest
+    update_cache: yes
+
+- name: attach ubuntu advantage client
+  action: ua attach "{{ ubuntu_advantage_token }}"

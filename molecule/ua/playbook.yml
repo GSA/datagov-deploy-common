@@ -1,0 +1,27 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: datagov-deploy-common
+      vars:
+        common_reboot_notify_email: email@example.com
+        common_operators:
+          - username: operator1
+            email: operator1@example.com
+            public_key: ssh-rsa key operator1@example.com
+            active: true
+          - username: operator_inactive
+            email: operator_inactive@example.com
+            public_key: "{{ inactive_operator_key }}"
+        filebeat_enabled: true
+        filebeat_config:
+          filebeat.config.modules:
+            enabled: true
+            path: ${path.config}/modules.d/*.yml
+          filebeat.modules:
+            - module: system
+              syslog:
+                enabled: true
+          output.logstash:
+            # This is not a functional logstash endpoint
+            hosts: ["localhost:1234"]

@@ -73,5 +73,5 @@ logrotate_scripts:
     - size 250M
     - rotate 5
 
-#ubuntu advantage
+# ubuntu advantage
 common_ubuntu_advantage_enabled: true

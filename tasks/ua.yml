@@ -7,3 +7,4 @@
 
 - name: attach ubuntu advantage client
   command: ua attach "{{ common_ubuntu_advantage_token }}"
+  when: common_ubuntu_advantage_enabled

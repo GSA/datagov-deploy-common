@@ -7,4 +7,11 @@
 
 - name: attach ubuntu advantage client
   command: ua attach "{{ common_ubuntu_advantage_token }}"
-  ignore_errors: yes
+  register: command_result
+  when: common_ubuntu_advantage_enabled
+  ignore_errors: True
+
+- name: validate ubuntu advantage client attached
+  fail:
+    msg: "Provided UA token is invalid"
+  when: "'Invalid token' in command_result.stderr"

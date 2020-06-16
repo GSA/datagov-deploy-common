@@ -13,6 +13,7 @@
           - username: operator_inactive
             email: operator_inactive@example.com
             public_key: "{{ inactive_operator_key }}"
+        common_ubuntu_advantage_token: ua-fake-token
         filebeat_enabled: true
         filebeat_config:
           filebeat.config.modules:

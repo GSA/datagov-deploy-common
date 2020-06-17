@@ -6,6 +6,8 @@
     update_cache: yes
 
 - name: attach ubuntu advantage client
-  command: ua attach "{{ common_ubuntu_advantage_token }}"
+  command:
+    cmd: ua attach "{{ common_ubuntu_advantage_token }}"
     creates: /etc/ubuntu-advantage/uaclient.conf
-  tags: molecule-notest
+  tags:
+    - molecule-notest

@@ -7,7 +7,6 @@
   tags:
     - ua
   when:
-    - ansible_distribution_release == "trusty"
     - common_ubuntu_advantage_enabled
 
 - name: Hardening for Ubuntu Trusty

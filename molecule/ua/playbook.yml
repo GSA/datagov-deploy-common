@@ -5,4 +5,3 @@
     - role: datagov-deploy-common
       vars:
         common_ubuntu_advantage_token: ua-fake-token
-        common_ubuntu_advantage_test: true

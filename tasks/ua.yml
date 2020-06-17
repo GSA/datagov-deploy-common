@@ -14,4 +14,6 @@
 - name: validate ubuntu advantage client attached
   fail:
     msg: "Provided UA token is invalid"
-  when: "'Invalid token' in command_result.stderr"
+  when:
+    - "'Invalid token' in command_result.stderr"
+    - common_ubuntu_advantage_test is undefined

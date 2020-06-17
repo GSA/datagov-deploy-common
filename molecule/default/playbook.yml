@@ -5,6 +5,7 @@
     - role: datagov-deploy-common
       vars:
         common_reboot_notify_email: email@example.com
+        common_ubuntu_advantage_test: true
         common_operators:
           - username: operator1
             email: operator1@example.com

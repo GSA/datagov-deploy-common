@@ -74,4 +74,4 @@ logrotate_scripts:
     - rotate 5
 
 # ubuntu advantage
-common_ubuntu_advantage_enabled: true
+common_ubuntu_advantage_enabled: false

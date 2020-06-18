@@ -36,20 +36,6 @@ provisioner:
         inactive_operator_key: ssh-rsa key operator_inactive@example.com
 scenario:
   name: ua
-  test_sequence:
-    - lint
-    - cleanup
-    - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - converge
-    # - idempotence  # to fix
-    # - side_effect  # optional
-    - verify
-    - cleanup
-    - destroy
 verifier:
   name: testinfra
   lint:

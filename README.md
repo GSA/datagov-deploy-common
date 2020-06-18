@@ -187,6 +187,13 @@ trendmicro.
 This is required when trendmicro_enabled is set. This is the numeric policy id
 that should be applied to this host and is assigned by SecOps.
 
+#### ua
+
+Install/update the ubuntu-advantage-tools
+
+**`common_ubuntu_advantage_enabled`** boolean (default: false) **required**
+
+**`common_ubuntu_advantage_token`** string **required**
 
 #### unattended-upgrades
 

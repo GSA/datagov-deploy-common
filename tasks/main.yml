@@ -3,6 +3,12 @@
   tags:
     - hostname
 
+- import_tasks: ua.yml
+  tags:
+    - ua
+  when:
+    - common_ubuntu_advantage_enabled
+
 - name: Hardening for Ubuntu Trusty
   import_role:
     name: gsa.ansible-os-ubuntu-14

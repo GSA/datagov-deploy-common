@@ -1,0 +1,13 @@
+---
+- name: install ubuntu advantage client
+  apt:
+    name: ubuntu-advantage-tools
+    state: present
+    cache_valid_time: "{{ 5 * 24 * 60 * 60 }}"
+
+- name: attach ubuntu advantage client
+  command:
+    cmd: ua attach {{ common_ubuntu_advantage_token }}
+    creates: /etc/ubuntu-advantage/uaclient.conf
+  tags:
+    - molecule-notest

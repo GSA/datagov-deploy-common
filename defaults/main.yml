@@ -72,3 +72,6 @@ logrotate_scripts:
     - copytruncate
     - size 250M
     - rotate 5
+
+# ubuntu advantage
+common_ubuntu_advantage_enabled: false

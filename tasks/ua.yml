@@ -8,6 +8,6 @@
 - name: attach ubuntu advantage client
   command:
     cmd: ua attach {{ common_ubuntu_advantage_token }}
-    creates: /etc/ubuntu-advantage/uaclient.conf
+    creates: /var/lib/ubuntu-advantage/status.json
   tags:
     - molecule-notest

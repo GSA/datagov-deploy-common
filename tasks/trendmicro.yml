@@ -23,12 +23,21 @@
     deb: "/tmp/trendmicro.deb"
   register: trendmicro_installed
 
-- name: sleep 10 seconds
-  command: sleep 10
-  when: trendmicro_installed is changed
-  tags:
-    - skip_ansible_lint
-
 - name: register trendmicro agent
   command: /opt/ds_agent/dsa_control -a dsm://dsm.sec.helix.gsa.gov:4120/ "policyid:{{ trendmicro_policy_id }}"
   when: trendmicro_policy_id is defined
+  register: trendmicro_register
+  ignore_errors: true
+  async: 120
+  poll: 10
+  retries: 1
+  delay: 10
+  until: trendmicro_register is success
+
+- name: manually register trendmicro agent
+  when: trendmicro_register is failed
+  fail:
+    msg: >-
+      Occasionally trendmicro registration will timeout. Re-run the playbook
+      with `--skip-tags trendmicro` and contact the firewall team for them to
+      manually register the failed instance or provide debugging support.

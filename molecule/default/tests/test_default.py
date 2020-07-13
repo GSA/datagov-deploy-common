@@ -102,6 +102,14 @@ def test_certificate(host):
     assert f.group == 'root'
 
 
+def test_certificate_symlink(host):
+    f = host.file('/usr/local/share/ca-certificates/datagov_host.crt')
+
+    assert f.is_symlink
+    assert f.linked_to == '/etc/ssl/certs/datagov_host.crt'
+    assert f.user == 'root'
+
+
 def test_key(host):
     f = host.file('/etc/ssl/private/datagov_host.key')
 

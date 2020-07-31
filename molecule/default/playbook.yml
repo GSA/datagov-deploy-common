@@ -9,10 +9,6 @@
           - username: operator1
             email: operator1@example.com
             public_key: ssh-rsa key operator1@example.com
-            active: true
-          - username: operator_inactive
-            email: operator_inactive@example.com
-            public_key: "{{ inactive_operator_key }}"
         filebeat_enabled: true
         filebeat_config:
           filebeat.config.modules:

@@ -15,4 +15,6 @@
         group: ubuntu
         mode: "0640"
         content: |
+          # BEGIN ANSIBLE MANAGED LIST OF USERS
           {{ inactive_operator_key }}
+          # END ANSIBLE MANAGED LIST OF USERS

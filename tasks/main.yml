@@ -38,9 +38,21 @@
   tags:
     - upstart
 
-- name: Install operator SSH keys
-  lineinfile: path=/home/ubuntu/.ssh/authorized_keys line={{ item.public_key }} state={{ item.active | default(false) | ternary('present', 'absent') }}
-  loop: "{{ common_operators }}"
+- name: Create block of current user keys
+  set_fact:
+    common_operator_key_block: "from=\"{{ jumpbox_ip }}\" {{ common_operators | join('\n from=\"{{ jumpbox_ip }}\"', attribute='public_key') }}"
+
+- name: Remove all current user keys
+  blockinfile:
+    path: /home/ubuntu/.ssh/authorized_keys
+    state: absent
+    marker: "# {mark} ANSIBLE MANAGED LIST OF USERS"
+
+- name: blockinfile insert
+  blockinfile:
+    path: /home/ubuntu/.ssh/authorized_keys
+    block: "{{ common_operator_key_block }}"
+    marker: "# {mark} ANSIBLE MANAGED LIST OF USERS"
 
 - name: Install build-essential
   import_role:

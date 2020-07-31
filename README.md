@@ -53,7 +53,6 @@ common_operators:
   - username: userone
     email: userone@example.com
     public_key: ssh-rsa aabbccddeeff1234567890 comment
-    active: true
 ```
 
 

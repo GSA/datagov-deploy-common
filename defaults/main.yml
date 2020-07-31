@@ -15,6 +15,9 @@ common_python_version_name: Python-{{ common_python_version_number }}
 # filebeat
 filebeat_enabled: false
 
+# By default allow SSH access from anywhere, can specify jumpbox ip to limit
+jumpbox_ip: "*"
+
 
 # postfix
 postfix_debconf_selections:

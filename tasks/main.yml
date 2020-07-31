@@ -40,7 +40,7 @@
 
 - name: Create block of current user keys
   set_fact:
-    common_operator_key_block: "from=\"{{ jumpbox_ip }}\" {{ common_operators | join('\n from=\"{{ jumpbox_ip }}\"', attribute='public_key') }}"
+    common_operator_key_block: "from=\"{{ jumpbox_ip }}\" {{ common_operators | join('\n from=\"{{ jumpbox_ip }}\" ', attribute='public_key') }}"
 
 - name: Remove all current user keys
   blockinfile:

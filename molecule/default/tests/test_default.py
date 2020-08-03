@@ -6,6 +6,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 operator_key = 'ssh-rsa key operator1@example.com'
+root_key = 'ssh-rsa root_key root@example.com'
 inactive_operator_key = 'ssh-rsa key operator_inactive@example.com'
 
 
@@ -123,4 +124,5 @@ def test_operator_keys(host):
     authorized_keys = host.file('/home/ubuntu/.ssh/authorized_keys')
 
     assert authorized_keys.contains(operator_key)
+    assert authorized_keys.contains(root_key)
     assert not authorized_keys.contains(inactive_operator_key)

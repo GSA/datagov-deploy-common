@@ -38,9 +38,14 @@
   tags:
     - upstart
 
-- name: Install operator SSH keys
-  lineinfile: path=/home/ubuntu/.ssh/authorized_keys line={{ item.public_key }} state={{ item.active | default(false) | ternary('present', 'absent') }}
-  loop: "{{ common_operators }}"
+- name: Install operator keys to ubuntu user, restricted to jumpbox
+  blockinfile:
+    path: /home/ubuntu/.ssh/authorized_keys
+    block: |
+      {% for operator in common_operators %}
+      from="{{ jumpbox_ips | join(',') }}" {{ operator.public_key }}
+      {% endfor %}
+    marker: "# {mark} ANSIBLE MANAGED LIST OF USERS"
 
 - name: Install build-essential
   import_role:

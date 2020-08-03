@@ -15,6 +15,7 @@
         group: ubuntu
         mode: "0640"
         content: |
+          ssh-rsa root_key root@example.com
           # BEGIN ANSIBLE MANAGED LIST OF USERS
           {{ inactive_operator_key }}
           # END ANSIBLE MANAGED LIST OF USERS

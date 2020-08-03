@@ -126,6 +126,9 @@ Tasks for OS hardening.
 
 Includes the hostname tasks to update /etc/hosts and hostname.
 
+#### jumpbox_ips
+
+The IP of the jumpbox to limit SSH access from jumpbox only. Defaults to `*` to allow access from anywhere.
 
 #### logrotate
 

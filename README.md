@@ -92,6 +92,13 @@ URL to download python from.
 Python filename.
 
 
+**`force_rebuild_python`** boolean (default: false)
+
+Force a rebuild of our custom python. In case you want to rebuild python with
+additional features, use this flag to force the rebuild.
+
+
+
 ### Tags
 
 You can run the playbook with these tags for quicker or targeted plays.

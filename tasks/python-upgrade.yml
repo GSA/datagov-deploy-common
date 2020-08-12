@@ -25,7 +25,11 @@
 
 - name: shall we rebuild python?
   set_fact:
-    rebuild_python: "{{ (force_rebuild_python | default(False)) or not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists }}"
+    rebuild_python: >-
+      {{ (force_rebuild_python | default(False))
+      or not python_dir.stat.exists
+      or python_version_check is failed
+      or not python_shared_lib.stat.exists }}
 
 - name: Display
   debug:

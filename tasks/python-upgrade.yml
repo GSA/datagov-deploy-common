@@ -23,12 +23,24 @@
   when: python_dir.stat.exists
   tags: skip_ansible_lint
 
+- name: shall we rebuild python?
+  set_fact:
+    rebuild_python: >-
+      {{ (force_rebuild_python | default(False))
+      or not python_dir.stat.exists
+      or python_version_check is failed
+      or not python_shared_lib.stat.exists }}
+
+- name: Display
+  debug:
+    msg: "{{ rebuild_python }}"
+
 - name: unpack new python
   unarchive:
     src: "{{ common_python_version_url }}"
     dest: /var/tmp/
     remote_src: yes
-  when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  when: rebuild_python
   register: result
   until: not result.failed
   retries: 3
@@ -38,13 +50,13 @@
   command: "./configure --prefix {{ common_python_version_directory }} --enable-ipv6 --enable-unicode=ucs4 --enable-shared"
   args:
     chdir: "/var/tmp/{{ common_python_version_name }}"
-  when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  when: rebuild_python
 
 - name: install new python
   shell: "umask 022; make && make install"
   args:
     chdir: "/var/tmp/{{ common_python_version_name }}"
-  when: not python_dir.stat.exists or python_version_check is failed or not python_shared_lib.stat.exists
+  when: rebuild_python
 
 # TODO install python to a known prefix like /usr/local to avoid this
 - name: add python lib to ld.so.conf

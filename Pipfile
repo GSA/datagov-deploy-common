@@ -4,8 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-molecule = {extras = ["docker"],version = "*"}
+molecule = {extras = ["docker"],version = "~=2.22.0"}
 ansible = "~=2.8.15"
+# Temporarily work-around issue in 4.3.0
+ansible-lint = "*"
 pytest-xdist = "*"
 
 [packages]

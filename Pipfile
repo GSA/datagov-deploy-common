@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 molecule = {extras = ["docker"],version = "*"}
+ansible = "~=2.8.15"
 pytest-xdist = "*"
 
 [packages]

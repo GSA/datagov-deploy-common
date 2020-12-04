@@ -24,6 +24,7 @@ common_os_packages:
   - git
   - libbz2-dev
   - libffi-dev
+  - libdb-dev
   - libgdbm-dev
   - liblzma-dev
   - libncurses5-dev

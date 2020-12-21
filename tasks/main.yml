@@ -69,6 +69,13 @@
   tags:
     - unattended-upgrades
 
+# https://github.com/GSA/datagov-deploy/issues/2103
+- name: override registered postfix_main_cf file set in ansible-ubuntu-16
+  set_fact:
+    postfix_main_cf: /etc/postfix/main.cf
+  tags:
+    - postfix
+
 - name: Install postfix mail server
   import_role:
     name: oefenweb.postfix

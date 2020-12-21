@@ -25,7 +25,7 @@ jobs:
             - .venv
       - run:
           name: test
-          command: pipenv run molecule test --all 2>&1 | tee /tmp/molecule.log
+          command: pipenv run test 2>&1 | tee /tmp/molecule.log
       - store_artifacts:
           path: /tmp/molecule.log
           destination: molecule.log

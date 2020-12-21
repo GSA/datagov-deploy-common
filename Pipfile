@@ -16,6 +16,6 @@ pytest-xdist = "*"
 python_version = "3.6"
 
 [scripts]
-test ="molecule test"
+test ="molecule test --all"
 debug ="molecule --debug test"
 converge="molecule converge"

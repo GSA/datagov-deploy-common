@@ -47,6 +47,13 @@
       {% endfor %}
     marker: "# {mark} ANSIBLE MANAGED LIST OF USERS"
 
+- name: Configure shell prompt
+  lineinfile:
+    path: /home/ubuntu/.bashrc
+    line: PS1='{{ common_shell_prompt }}'
+    state: present
+  when: common_shell_prompt is defined
+
 - name: Install build-essential
   import_role:
     name: ANXS.build-essential

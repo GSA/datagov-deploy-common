@@ -9,18 +9,7 @@
   when:
     - common_ubuntu_advantage_enabled
 
-- name: Hardening for Ubuntu Trusty
-  import_role:
-    name: gsa.ansible-os-ubuntu-14
-  when: ansible_distribution_release == "trusty"
-  tags:
-    - hardening
-    - molecule-notest
-
-- name: Hardening for Ubuntu Xenial or Bionic
-  import_role:
-    name: gsa.ansible-os-ubuntu-16
-  when: ansible_distribution_release == "bionic" or ansible_distribution_release == "xenial"
+- import_tasks: hardening.yml
   tags:
     - hardening
     - molecule-notest

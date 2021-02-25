@@ -1,0 +1,28 @@
+---
+- name: Hardening for Ubuntu Trusty
+  import_role:
+    name: gsa.ansible-os-ubuntu-14
+  when: ansible_distribution_release == "trusty"
+
+- name: Hardening for Ubuntu Xenial or Bionic
+  import_role:
+    name: gsa.ansible-os-ubuntu-16
+  when: ansible_distribution_release == "bionic" or ansible_distribution_release == "xenial"
+
+# https://github.com/GSA/datagov-deploy/issues/2655
+# Disable IPv6 without disabling the entire IPv6 subsystem. Ubuntu assumes the
+# subsystem exists and so does the ansible-os-ubuntu hardening roles.
+- name: Disable IPv6
+  sysctl:
+    name: net.ipv6.conf.all.disable_ipv6
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+# https://github.com/GSA/datagov-deploy/issues/2655
+- name: Avoid disabling the entire IPv6 subsystem "3.3.3 | Ensure IPv6 is disabled"
+  lineinfile: >
+      dest=/etc/default/grub
+      line='GRUB_CMDLINE_LINUX="ipv6.disable=1"'
+      state=absent

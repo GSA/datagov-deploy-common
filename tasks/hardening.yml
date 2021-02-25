@@ -21,8 +21,10 @@
     reload: yes
 
 # https://github.com/GSA/datagov-deploy/issues/2655
-- name: Avoid disabling the entire IPv6 subsystem "3.3.3 | Ensure IPv6 is disabled"
+# Update the last GRUB_CMDLINE_LINUX line and leave ipv6 enabled.
+- name: Ensure apparmor and auditing are enabled
   lineinfile: >
-      dest=/etc/default/grub
-      line='GRUB_CMDLINE_LINUX="ipv6.disable=1"'
-      state=absent
+    regexp='^GRUB_CMDLINE_LINUX='
+    dest=/etc/default/grub
+    line='GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor audit=1"'
+    state=present

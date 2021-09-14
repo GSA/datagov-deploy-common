@@ -40,7 +40,7 @@ nessus_agent_group: ''
 nessus_agent_url:
 # Provided by GSA SecOps
 # https://drive.google.com/drive/folders/0B726fftFCN-oemFRazdnM3FITE0
-nessus_agent_package: NessusAgent-8.2.5-ubuntu1110_amd64.deb
+nessus_agent_package: NessusAgent-8.3.1-ubuntu1110_amd64.deb
 nessus_agent_host: cloud.tenable.com
 nessus_agent_port: 443
 nessus_agent_enabled: false
